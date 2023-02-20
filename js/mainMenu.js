@@ -52,10 +52,15 @@ function draw() {
     let productPrice = row.insertCell();
     productPrice.innerHTML = product[1];
     let eliminate = row.insertCell();
-    eliminate.innerHTML = `<button type="button" class="btn btn-danger">X</button>    `;
+    eliminate.innerHTML = `<button type="button" onclick="eliminateProd(${i})" class="btn btn-danger">X</button>    `;
     total += product[1];
     document.getElementById("total").innerHTML = `Pedido (T: ${total}€)`;
   }
+}
+
+function eliminateProd(position) {
+  cart.splice(position, 1);
+  draw();
 }
 
 function insertProd() {
@@ -65,7 +70,6 @@ function insertProd() {
 
   /* Creation on HTML to put on table */
   let row = tableBody.insertRow();
-
   let productCell = row.insertCell();
   productCell.innerHTML = productName.value;
 
@@ -86,9 +90,6 @@ function insertProd() {
   //tableBody.appendChild(row);
 }
 
-function eliminateProd(row) {
-  row.remove();
-}
 function updatePrice(product) {
   let priceInput = document.getElementById("price");
   console.log(priceInput);
