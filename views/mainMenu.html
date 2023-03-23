@@ -26,6 +26,14 @@
     <nav class="navbar navbar-dark bg-dark">
       <div class="container-fluid">
         <span class="navbar-brand mb-0 h1">TorreStore</span>
+        <button
+          type="button"
+          class="btn btn-info"
+          data-bs-toggle="modal"
+          data-bs-target="#productAdd"
+        >
+          Añadir productos
+        </button>
       </div>
     </nav>
     <div class="row">
@@ -51,6 +59,17 @@
                       onclick="insertProd()"
                     >
                       Confirmar
+                    </button>
+                  </div>
+                </div>
+                <div class="row mt-2">
+                  <div class="d-grid gap-2">
+                    <button
+                      class="btn btn-primary"
+                      type="button"
+                      id="buttonInfo"
+                    >
+                      Informacion
                     </button>
                   </div>
                 </div>
@@ -82,7 +101,72 @@
         </div>
       </div>
     </div>
-    <div id="example"></div>
+    <div
+      class="modal fade"
+      id="productAdd"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              Añade tu producto
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form action="" id="formProd" method="post">
+              <div class="row">
+                <div class="col-4">
+                  <div class="form-floating mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="productName"
+                      placeholder="name@example.com"
+                    />
+                    <label for="floatingInput">Nombre producto</label>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="form-floating mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="price"
+                      placeholder="name@example.com"
+                    />
+                    <label for="floatingInput">Precio</label>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="form-floating mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="image"
+                      placeholder="name@example.com"
+                    />
+                    <label for="floatingInput">Imagen</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <button type="submit" class="btn btn-success">Crear</button>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer"></div>
+        </div>
+      </div>
+    </div>
     <script src="../js/mainMenu.js"></script>
   </body>
 </html>

@@ -14,10 +14,36 @@ var products = [
 ];
 
 window.addEventListener("load", (ev) => {
+  if (localStorage.getItem("products")) {
+    products = JSON.parse(localStorage.getItem("products"));
+    console.log("Existe el localStorage");
+    drawProds();
+  } else {
+    console.log("No existe el localStorage");
+    localStorage.setItem("products", JSON.stringify(products));
+    drawProds();
+  }
+
+  document.getElementById("formProd").addEventListener("submit", (evForm) => {
+    evForm.preventDefault();
+    console.log(evForm.target.elements);
+    products.push([
+      evForm.target.elements.productName.value,
+      evForm.target.elements.price.value,
+      evForm.target.elements.image.value,
+    ]);
+    localStorage.setItem("products", JSON.stringify(products));
+    console.log(products);
+    drawProds();
+  });
+});
+
+function drawProds() {
+  document.getElementById("productsAvail").innerHTML = "";
   for (let i = 0; i < products.length; i++) {
     const product = products[i];
     let contenedor = `<div class="card" style="height:auto; width:25%;">
-    <img src="${product[2]}" onclick="addCart(${i})" class="card-img-top" style="height:auto; width:100%;" alt="...">
+    <img src="${product[2]}" data-valueprod="${i}" class="card-img-top imgProduct" style="height:auto; width:100%;" alt="...">
     <div class="card-body">`;
     console.log(product);
     for (let j = 0; j < product.length - 1; j++) {
@@ -29,7 +55,15 @@ window.addEventListener("load", (ev) => {
     contenedor += "</div></div>";
     document.getElementById("productsAvail").innerHTML += contenedor;
   }
-});
+
+  document.querySelectorAll(".imgProduct").forEach((element, key, parent) => {
+    console.log(element);
+    console.log(key);
+    element.addEventListener("click", (ev) => {
+      addCart(ev.target.dataset.valueprod);
+    });
+  });
+}
 
 function addCart(position) {
   // console.log("Position of product: " + position);
@@ -82,7 +116,7 @@ function insertProd() {
   redButton.classList.add("btn", "btn-danger");
   redButton.innerHTML = `<i class="fa-solid fa-xmark"></i>`;
   quitCell.appendChild(redButton);
-  quitCell.addEventListener("click", function () {
+  quitCell.addEventListener("click", (ev) => {
     eliminateProd(row);
   });
 
